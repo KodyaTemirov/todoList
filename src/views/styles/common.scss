@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+    @apply bg-slate-200 flex min-h-screen box-border p-4 items-center justify-center;
+}

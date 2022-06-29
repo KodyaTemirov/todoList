@@ -1,0 +1,7 @@
+.article{
+    @apply min-w-max bg-white rounded p-4;
+
+    &Title{
+        @apply text-4xl text-center mb-5 font-sans;
+    }
+}
