@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import s from "./task.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 interface TaskProps {
   id: string;
@@ -22,6 +22,11 @@ export const Task: React.FC<TaskProps> = ({
   const [checked, setChecked] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(title);
+  const editTitleInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    isEditMode && editTitleInputRef?.current?.focus();
+  }, [isEditMode]);
 
   const checkboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
@@ -36,6 +41,12 @@ export const Task: React.FC<TaskProps> = ({
   const editModeHandler = () => {
     setIsEditMode(true);
   };
+
+  const saveModeHandler = () => {
+    onEdited(id, inputValue);
+    setIsEditMode(false);
+  };
+
   const editOnChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
@@ -54,6 +65,7 @@ export const Task: React.FC<TaskProps> = ({
           <h3 className={s.taskTitle}>{title}</h3>
         ) : (
           <input
+            ref={editTitleInputRef}
             value={inputValue}
             onChange={editOnChange}
             className={s.taskEditInput}
@@ -61,13 +73,23 @@ export const Task: React.FC<TaskProps> = ({
         )}
       </label>
       <div className={s.taskActions}>
-        <button
-          aria-label="Edit"
-          className={s.taskEdit}
-          onClick={editModeHandler}
-        >
-          <FontAwesomeIcon icon={faEdit} className={s.taskButtonIcon} />
-        </button>
+        {!isEditMode ? (
+          <button
+            aria-label="Edit"
+            className={s.taskEdit}
+            onClick={editModeHandler}
+          >
+            <FontAwesomeIcon icon={faEdit} className={s.taskButtonIcon} />
+          </button>
+        ) : (
+          <button
+            aria-label="Save"
+            className={s.taskSave}
+            onClick={saveModeHandler}
+          >
+            <FontAwesomeIcon icon={faCheck} className={s.taskButtonIcon} />
+          </button>
+        )}
         <button
           aria-label="Remove"
           className={s.taskRemove}
