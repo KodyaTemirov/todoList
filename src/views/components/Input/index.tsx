@@ -1,9 +1,3 @@
-import React from "react";
-import s from "./input.module.scss";
-interface InputProps {
-  onAdd: (title: string) => void;
-}
+import { Input } from "./input";
 
-export const Input: React.FC<InputProps> = ({ onAdd }) => {
-  return <input></input>;
-};
+export default Input;

@@ -1,6 +1,10 @@
 import React from "react";
 import s from "./index.module.scss";
-import { Input } from "../components/Input";
+
+import Input from "../components/Input";
+import Empty from "../components/Empty";
+import Task from "../components/Task";
+
 import { useToDoStore } from "../../data/stores/useToDoStore";
 
 export const App: React.FC = () => {
@@ -23,7 +27,26 @@ export const App: React.FC = () => {
           }}
         />
       </section>
-      <section className={s.articleSection}></section>
+      <section className={s.articleSection}>
+        {!tasks.length ? (
+          <Empty />
+        ) : (
+          <div>
+            {tasks.map(({ title, id }) => {
+              return (
+                <Task
+                  id={id}
+                  key={id}
+                  title={title}
+                  onDone={removeTask}
+                  onEdited={updateTask}
+                  onRemoved={removeTask}
+                />
+              );
+            })}
+          </div>
+        )}
+      </section>
     </article>
   );
 };

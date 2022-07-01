@@ -1,0 +1,30 @@
+.input {
+    @apply flex gap-2;
+
+    &Value {
+        @apply w-full flex border rounded-sm p-2 shadow-sm;
+
+        &::placeholder {
+            @apply font-extralight;
+        }
+
+        &:focus {
+            @apply bg-white transition-all;
+
+        }
+    }
+
+    &Button {
+        @apply bg-blue-500 text-white px-6 py-2 rounded-sm flex items-center gap-2 shadow-sm;
+
+        &:hover {
+            @apply bg-blue-600 transition-all;
+        }
+
+        &:focus {
+            @apply bg-blue-600 transition-all;
+        }
+
+
+    }
+}

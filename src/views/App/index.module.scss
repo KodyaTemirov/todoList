@@ -1,7 +1,12 @@
-.article{
-    @apply min-w-max bg-white rounded p-4;
+.article {
+    width: 600px;
+    @apply bg-white rounded p-4;
 
-    &Title{
+    &Title {
         @apply text-4xl text-center mb-5 font-sans;
+    }
+
+    &Section {
+        @apply mb-4
     }
 }

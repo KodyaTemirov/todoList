@@ -1,0 +1,54 @@
+.task {
+    @apply flex gap-4 border-b pl-4 pr-2 py-2 bg-slate-50 rounded-sm;
+
+    &:first-child {
+        @apply border-t
+    }
+
+    &Label {
+        @apply flex w-full gap-2 items-center
+    }
+
+    &Actions {
+        @apply flex gap-2 items-center
+    }
+
+    &EditInput {
+        @apply border-gray-200 border px-2 w-full;
+    }
+
+    &Remove,
+    &Edit {
+        @apply w-8 h-8 rounded-sm text-sm transition-all;
+    }
+
+    &Remove {
+        @apply bg-red-500 text-white;
+
+        &:hover {
+            @apply bg-red-600;
+        }
+
+        &:focus {
+            @apply bg-red-600;
+
+        }
+    }
+
+    &Edit {
+        @apply bg-blue-500 text-white;
+
+        &:hover {
+            @apply bg-blue-600;
+        }
+
+        &:focus {
+            @apply bg-blue-600;
+
+        }
+    }
+
+    & &Checkbox {
+        @apply cursor-pointer
+    }
+}

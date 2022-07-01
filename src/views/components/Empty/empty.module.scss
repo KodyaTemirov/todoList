@@ -1,0 +1,11 @@
+.empty {
+    @apply flex items-center flex-col m-8 gap-4;
+
+    &Icon {
+        @apply text-6xl text-slate-200
+    }
+
+    &Text {
+        @apply text-base text-slate-300
+    }
+}
