@@ -34,7 +34,7 @@ export const Input: React.FC<InputProps> = ({ onAdd }) => {
       />
       <button onClick={addTask} className={s.inputButton}>
         <FontAwesomeIcon icon={faPlus} />
-        Добавить
+        Add
       </button>
     </div>
   );
