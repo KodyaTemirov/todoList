@@ -1,5 +1,6 @@
 import create, { StateCreator, State } from "zustand";
-import { generateId } from "../helpers/";
+import generateId from "../helpers";
+
 interface Task {
   id: string;
   title: string;

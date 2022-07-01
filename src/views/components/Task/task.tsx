@@ -47,7 +47,7 @@ export const Task: React.FC<TaskProps> = ({
     setIsEditMode(false);
   };
 
-  const editOnChange = (e) => {
+  const editOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
   };
