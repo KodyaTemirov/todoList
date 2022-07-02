@@ -5,8 +5,17 @@
         @apply border-t
     }
 
+    &Info {
+        @apply flex justify-between w-full
+    }
+
+
     &Label {
         @apply flex w-full gap-2 items-center
+    }
+
+    &Date {
+        @apply text-gray-500 flex gap-1 items-center text-sm font-light
     }
 
     &Actions {
