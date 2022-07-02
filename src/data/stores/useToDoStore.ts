@@ -5,6 +5,7 @@ interface Task {
   id: string;
   title: string;
   createdAt: number;
+  isDone: boolean;
 }
 
 interface ToDoStore {
@@ -12,6 +13,7 @@ interface ToDoStore {
   createTask: (title: string) => void;
   updateTask: (id: string, title: string) => void;
   removeTask: (id: string) => void;
+  doneTask: (id: string, isDone: boolean) => void;
 }
 function isToDoStore(object: any): object is ToDoStore {
   return "tasks" in object;
@@ -51,6 +53,7 @@ export const useToDoStore = create<ToDoStore>(
         id: generateId(),
         title,
         createdAt: Date.now(),
+        isDone: false,
       };
       set({
         tasks: [newTask].concat(tasks),
@@ -70,6 +73,16 @@ export const useToDoStore = create<ToDoStore>(
       set({
         tasks: tasks.filter((task) => task.id !== id),
       });
+    },
+    doneTask: (id: string, isDone: boolean) => {
+      const { tasks } = get();
+      set({
+        tasks: tasks.map((task) => ({
+          ...task,
+          isDone: task.id === id ? !task.isDone : task.isDone,
+        })),
+      });
+      console.log(tasks);
     },
   }))
 );

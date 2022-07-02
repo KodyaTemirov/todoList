@@ -1,13 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import s from "./task.module.scss";
-
+import dateFormat, { masks } from "dateformat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashCan,
+  faEdit,
+  faCheck,
+  faCalendarDays,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface TaskProps {
   id: string;
   title: string;
-  onDone: (id: string) => void;
+  createdAt: number;
+  isDone: boolean;
+  onDone: (id: string, isDone: boolean) => void;
   onEdited: (id: string, title: string) => void;
   onRemoved: (id: string) => void;
 }
@@ -15,11 +22,13 @@ interface TaskProps {
 export const Task: React.FC<TaskProps> = ({
   id,
   title,
+  createdAt,
+  isDone,
   onDone,
   onEdited,
   onRemoved,
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(isDone);
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(title);
   const editTitleInputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +40,7 @@ export const Task: React.FC<TaskProps> = ({
   const checkboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     setChecked(checked);
-    checked && onDone(id);
+    onDone(id, checked);
   };
 
   const removeHandler = () => {
@@ -51,6 +60,7 @@ export const Task: React.FC<TaskProps> = ({
     const value = e.target.value;
     setInputValue(value);
   };
+  const date = dateFormat(createdAt, "d.mm.yy");
   return (
     <div className={s.task}>
       <label htmlFor="" className={s.taskLabel}>
@@ -62,7 +72,16 @@ export const Task: React.FC<TaskProps> = ({
           onChange={checkboxChange}
         />
         {!isEditMode ? (
-          <h3 className={s.taskTitle}>{title}</h3>
+          <div className={s.taskInfo}>
+            <h3 className={s.taskTitle}>{title}</h3>
+            <span className={s.taskDate}>
+              <FontAwesomeIcon
+                icon={faCalendarDays}
+                className={s.taskButtonIcon}
+              />
+              {date}
+            </span>
+          </div>
         ) : (
           <input
             ref={editTitleInputRef}
