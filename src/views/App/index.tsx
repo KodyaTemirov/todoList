@@ -18,7 +18,7 @@ export const App: React.FC = () => {
       state.doneTask,
     ]
   );
-  const [tabStatus, setTabStatus] = useState(false);
+  const [tabStatus, setTabStatus] = useState(true);
 
   const handler = () => {
     setTabStatus(!tabStatus);
